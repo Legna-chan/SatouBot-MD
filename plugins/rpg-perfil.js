@@ -1,48 +1,42 @@
-import moment from 'moment-timezone';
 
-let handler = async (m, { conn, args }) => {
-  let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
-  let user = global.db.data.users[userId];
+import PhoneNumber from 'awesome-phonenumber'
+import fetch from 'node-fetch'
+var handler = async (m, { conn }) => {
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+let pp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/32103b8335e64d253fa98.jpg')
+let { premium, level, estrellas, exp, lastclaim, registered, regTime, age, role } = global.db.data.users[m.sender]
+let username = conn.getName(who)
+let noprem = `
+🍭 *PERFIL DE USUARIO*
+💖 *Nombre:* ${username}
+💥 *Tag:* @${who.replace(/@.+/, '')}
+🌀 *Registrado:* ${registered ? '✅': '❌'}
 
-  let name = conn.getName(userId);
-  let cumpleanos = user.birth || 'No especificado';
-  let genero = user.genre || 'No especificado';
-  let pareja = user.marry || 'No especificado';
-  let exp = user.exp || 0;
-  let nivel = user.level || 0;
-  let coins = user.coin || 0;
+👑 *RECURSOS*
+🥖 *Panes:* ${estrellas}
+💥 *Nivel:* ${level}
+💫 *Experiencia:* ${exp}
+✨️ *Rango:* ${role}
 
-  let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://qu.ax/QGAVS.jpg');
+💖 *Premium:* ${premium ? '✅': '❌'}
+`.trim()
+let prem = `╭──⪩ 𝐔𝐒𝐔𝐀𝐑𝐈𝐎 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 ⪨
+│⧼👤⧽ *ᴜsᴜᴀʀɪᴏ:* 「${username}」
+│⧼💌⧽ *ʀᴇɢɪsᴛʀᴀᴅᴏ:* ${registered ? '✅': '❌'}
+│⧼🔱⧽ *ʀᴏʟ:* Vip 👑
+╰───⪨
 
-  let profileText = `
-ᥫ᭡ *Perfil* @${userId.split('@')[0]}
-
-✧ *Cumpleaños* » ${cumpleanos}
-✧ *Género* » ${genero}
-ᰔᩚ *Casado con* » ${pareja}
-
-🥖 *${panes}* » ${panes}
-  `.trim();
-
-  await conn.sendMessage(m.chat, { 
-    text: profileText,
-    contextInfo: {
-      mentionedJid: [userId],
-      externalAdReply: {
-        title: '✧ Perfil de Usuario ✧',
-        body: botname,
-        thumbnailUrl: perfil,
-        sourceUrl: enlace,
-        mediaType: 1,
-        showAdAttribution: true,
-        renderLargerThumbnail: true
-      }
-    }
-  }, { quoted: m })
-};
-
-handler.help = ['profile'];
-handler.tags = ['rg'];
-handler.command = ['profile'];
-
-export default handler;
+╭────⪩ 𝐑𝐄𝐂𝐔𝐑𝐒𝐎𝐒 ⪨
+│⧼🥖⧽ *ᴘᴀɴᴇs:* ${estrellas}
+│⧼🔰⧽ *ɴɪᴠᴇʟ:* ${level}
+│⧼💫⧽ *ᴇxᴘᴇʀɪᴇɴᴄɪᴀ:* ${exp}
+│⧼⚜️⧽ *ʀᴀɴɢᴏ:* ${role}
+╰───⪨ *𝓤𝓼𝓾𝓪𝓻𝓲𝓸 𝓓𝓮𝓼𝓽𝓪𝓬𝓪𝓭𝓸* ⪩`.trim()
+conn.sendFile(m.chat, pp, 'perfil.jpg', `${premium ? prem.trim() : noprem.trim()}`, m, rcanal, { mentions: [who] })
+}
+handler.help = ['profile']
+handler.register = true
+//handler.group = true
+handler.tags = ['rg']
+handler.command = ['profile', 'perfil']
+export default handler
