@@ -34,7 +34,7 @@ global.wm = '🍧𝐒𝐚𝐭𝐨𝐮𝐁𝐨𝐭-𝐌𝐃🍧'
 global.author = 'Legna 🌸'
 global.dev = 'Powered By Legna 🍭'
 global.textbot = '༘🪷⋆𝓜𝓪𝓽𝓼𝓾𝔃𝓪𝓴𝓪𝓞𝓯𝓬౨ৎ⋆˚｡⋆'
-global.vs = '3.0.4'
+global.vs = '1.0.0'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
