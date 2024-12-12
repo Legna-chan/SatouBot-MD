@@ -21,7 +21,7 @@ let handler = async (m, { conn, args }) => {
 ✧ *Género* » ${genero}
 ᰔᩚ *Casado con* » ${pareja}
 
-⛁ *${moneda}* » ${coins}
+⛁ *${panes}* » ${estrellas}
   `.trim();
 
   await conn.sendMessage(m.chat, { 
