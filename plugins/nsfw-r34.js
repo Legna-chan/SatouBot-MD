@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 const handler = async (m, { conn, args, usedPrefix }) => {
 if (!args[0]) {
 if (!db.data.chats[m.chat].nsfw && m.isGroup) {
-    return m.reply('*[🍭] 𝗟𝗼𝘀 𝗰𝗼𝗺𝗮𝗻𝗱𝗼𝘀 𝘀𝗳𝘄 𝗲𝘀𝘁𝗮𝗻 𝗱𝗲𝘀𝗮𝗰𝘁𝗶𝘃𝗮𝗱𝗼𝘀 𝗲𝗻 𝗲𝘀𝘁𝗲 𝗴𝗿𝘂𝗽𝗼.*\n> 𝐬𝐢 𝐞𝐬 𝐚𝐝𝐦𝐢𝐧 𝐲 𝐝𝐞𝐬𝐞𝐚 𝐚𝐜𝐭𝐢𝐯𝐚𝐫𝐥𝐨𝐬 𝐮𝐬𝐞 .enable nsfw');
+    return m.reply('*[🍭] 𝗟𝗼𝘀 𝗰𝗼𝗺𝗮𝗻𝗱𝗼𝘀 𝗻𝘀𝗳𝘄 𝗲𝘀𝘁𝗮𝗻 𝗱𝗲𝘀𝗮𝗰𝘁𝗶𝘃𝗮𝗱𝗼𝘀 𝗲𝗻 𝗲𝘀𝘁𝗲 𝗴𝗿𝘂𝗽𝗼.*\n> 𝐬𝐢 𝐞𝐬 𝐚𝐝𝐦𝐢𝐧 𝐲 𝐝𝐞𝐬𝐞𝐚 𝐚𝐜𝐭𝐢𝐯𝐚𝐫𝐥𝐨𝐬 𝐮𝐬𝐞 .enable nsfw');
 }
 await conn.reply(m.chat, '🍭 *Ingresa el nombre de la imágen que estas buscando*', m, rcanal);
 return;
